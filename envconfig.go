@@ -19,6 +19,8 @@ import (
 // ErrInvalidSpecification indicates that a specification is of the wrong type.
 var ErrInvalidSpecification = errors.New("specification must be a struct pointer")
 
+var StructTag = "envconfig"
+
 var gatherRegexp = regexp.MustCompile("([^A-Z]+|[A-Z]+[^A-Z]+|[A-Z]+)")
 var acronymRegexp = regexp.MustCompile("([A-Z]+)([A-Z][^A-Z]+)")
 
@@ -96,7 +98,7 @@ func gatherInfo(prefix string, spec interface{}) ([]varInfo, error) {
 			Name:  ftype.Name,
 			Field: f,
 			Tags:  ftype.Tag,
-			Alt:   strings.ToUpper(ftype.Tag.Get("envconfig")),
+			Alt:   strings.ToUpper(ftype.Tag.Get(StructTag)),
 		}
 
 		// Default to the field name as the env var name (will be upcased)
