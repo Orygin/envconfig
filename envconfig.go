@@ -237,6 +237,10 @@ func MustProcess(prefix string, spec interface{}) {
 }
 
 func processField(value string, field reflect.Value) error {
+	if value == "" {
+		return nil
+	}
+
 	typ := field.Type()
 
 	decoder := decoderFrom(field)
