@@ -193,9 +193,6 @@ func Process(prefix string, spec interface{}) error {
 		// but it is only available in go1.5 or newer. We're using Go build tags
 		// here to use os.LookupEnv for >=go1.5
 		value, ok := lookupEnv(info.Key)
-		if !ok && info.Alt != "" {
-			value, ok = lookupEnv(info.Alt)
-		}
 
 		def := info.Tags.Get("default")
 		if def != "" && !ok {
